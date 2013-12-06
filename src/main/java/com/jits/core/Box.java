@@ -3,7 +3,7 @@ package com.jits.core;
 public class Box extends Package {
 	double width;
 	double depth;
-	double height; 
+	double height;
  
 	public double getWidth() {
 		return width;
