@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>helloservletjsp</display-name>
+  <display-name>jits</display-name>
   <welcome-file-list>
-    <welcome-file>/jsp/hello.jsp</welcome-file>
+    <welcome-file>/jsp/jits.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>HelloServlet</display-name>
-    <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>com.gap.hello.HelloServlet</servlet-class>
+    <display-name>JitsServlet</display-name>
+    <servlet-name>JitsServlet</servlet-name>
+    <servlet-class>com.gap.jits.JitsServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/HelloServlet</url-pattern>
+   <servlet-mapping>
+    <servlet-name>JitsServlet</servlet-name>
+    <url-pattern>/JitsServlet</url-pattern>
   </servlet-mapping>
 </web-app>

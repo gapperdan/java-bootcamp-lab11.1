@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Current Date and Time</title>
+<title>Hello</title>
 </head>
 <body>
-	<%java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy"); %>
-	<p>Current Date: <%= df.format(new java.util.Date()) %> </p>	
+<form action="/JitsServlet">
+<input type="radio" name="packageType" value="box">Box<br>
+<input type="radio" name="packageType" value="letter">Letter
+</form>
 </body>
 </html>
