@@ -58,4 +58,21 @@ public class Address {
 		}
 		return isValid;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Address [name=");
+		builder.append(name);
+		builder.append(", street=");
+		builder.append(street);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(", zip=");
+		builder.append(zip);
+		builder.append("]");
+		return builder.toString();
+	}
 }

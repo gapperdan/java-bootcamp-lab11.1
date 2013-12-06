@@ -60,4 +60,22 @@ public class Package {
 	public void setPackageStatus(PACKAGE_STATUS packageStatus) {
 		this.packageStatus = packageStatus;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Package [id=");
+		builder.append(id);
+		builder.append(", destination=");
+		builder.append(destination);
+		builder.append(", origin=");
+		builder.append(origin);
+		builder.append(", deliveryType=");
+		builder.append(deliveryType);
+		builder.append(", packageStatus=");
+		builder.append(packageStatus);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
