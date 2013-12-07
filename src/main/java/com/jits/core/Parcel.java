@@ -1,6 +1,6 @@
 package com.jits.core;
 
-public class Package {
+public abstract class Parcel {
 
 	public enum DELIVERY_TYPE {
 		AIR, GROUND
@@ -48,9 +48,15 @@ public class Package {
 		this.deliveryType = deliveryType;
 	}
 	
-	public boolean isValid() {
-		if (getId() == null) return false;
-		return (!getId().equals(""));
+	public boolean hasValidId() {
+		boolean valid = false;
+		if (getId() == null || "".equals(getId())) {
+			valid = false;
+		} else {
+			valid = true;
+		}
+			
+		return valid;
 	}
 
 	public PACKAGE_STATUS getPackageStatus() {

@@ -4,10 +4,10 @@ import javax.swing.JOptionPane;
 
 import com.jits.core.Address;
 import com.jits.core.Box;
-import com.jits.core.Package;
+import com.jits.core.Parcel;
 import com.jits.core.Letter;
-import com.jits.core.Package.DELIVERY_TYPE;
-import com.jits.core.PackageFactory;
+import com.jits.core.Parcel.DELIVERY_TYPE;
+import com.jits.core.ParcelFactory;
 
 public class Jits {
 	static private Box box;
@@ -15,12 +15,12 @@ public class Jits {
 	static private Address destination;
 	static private Address origin;
 
-	public static void displayInfo(Package pkg) {
+	public static void displayInfo(Parcel parcel) {
 
 		String dimensionString = "";
 
-		if (pkg instanceof Box) {
-			Box box = (Box) pkg;
+		if (parcel instanceof Box) {
+			Box box = (Box) parcel;
 			dimensionString = "dimension: " + box.getWidth() + " X "
 					+ box.getHeight() + " X " + box.getHeight() + "\n\n";
 		}
@@ -29,43 +29,43 @@ public class Jits {
 				+ "id = "
 				+ box.getId()
 				+ " | Delivery Type = "
-				+ pkg.getDeliveryType()
+				+ parcel.getDeliveryType()
 				+ "\n"
 				+ dimensionString
 				+ "----- Destination ----- \n"
-				+ pkg.getDestination().getName()
+				+ parcel.getDestination().getName()
 				+ "\n"
-				+ pkg.getDestination().getStreet()
+				+ parcel.getDestination().getStreet()
 				+ "\n"
-				+ pkg.getDestination().getZip()
+				+ parcel.getDestination().getZip()
 				+ "\n"
 				+
 
 				"----- Origin ----- \n"
-				+ pkg.getOrigin().getName()
+				+ parcel.getOrigin().getName()
 				+ "\n"
-				+ pkg.getOrigin().getStreet()
+				+ parcel.getOrigin().getStreet()
 				+ "\n"
-				+ pkg.getOrigin().getCity()
+				+ parcel.getOrigin().getCity()
 				+ " "
-				+ pkg.getOrigin().getState()
-				+ " " + pkg.getOrigin().getZip() + "\n\n" +
+				+ parcel.getOrigin().getState()
+				+ " " + parcel.getOrigin().getZip() + "\n\n" +
 
 				"Click Yes to Approve"
 				
 				);
 		
 		if (approved == JOptionPane.YES_OPTION) {
-			pkg.setPackageStatus(Package.PACKAGE_STATUS.SHIPPED);
+			parcel.setPackageStatus(Parcel.PACKAGE_STATUS.SHIPPED);
 		} else {
-			pkg.setPackageStatus(Package.PACKAGE_STATUS.CANCELLED);
+			parcel.setPackageStatus(Parcel.PACKAGE_STATUS.CANCELLED);
 		}
 
 	}
 
 	public static void main(String[] args) {
 
-		box = (Box) PackageFactory.createPackage("box");
+		box = (Box) ParcelFactory.createParcel("box");
 		box.setId("Xmas Surprise!");
 		box.setDeliveryType(DELIVERY_TYPE.AIR);
 		box.setHeight(1.0);
@@ -83,7 +83,7 @@ public class Jits {
 
 		displayInfo(box);
 
-		letter = (Letter) PackageFactory.createPackage("letter");
+		letter = (Letter) ParcelFactory.createParcel("letter");
 		letter.setId("Xmas Surprise!");
 		letter.setDeliveryType(DELIVERY_TYPE.GROUND);
 

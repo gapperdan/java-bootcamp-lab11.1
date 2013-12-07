@@ -8,54 +8,53 @@ import org.junit.Test;
 import com.jits.core.Address;
 import com.jits.core.Box;
 import com.jits.core.Letter;
-import com.jits.core.Package;
+import com.jits.core.Parcel;
 
-public class PackageTest {
+public class ParcelTest {
 
-	Package pkg;
+	Parcel parcel;
 	
 	@Before
 	public void setup() {
-		pkg = new Package();
+		parcel = ParcelFactory.createParcel("box");
 	}
 	
 	@Test
 	public void testShipmentApproved() {
-		pkg.setPackageStatus(Package.PACKAGE_STATUS.APPROVED);
-		assertEquals(Package.PACKAGE_STATUS.APPROVED, pkg.getPackageStatus());
+		parcel.setPackageStatus(Parcel.PACKAGE_STATUS.APPROVED);
+		assertEquals(Parcel.PACKAGE_STATUS.APPROVED, parcel.getPackageStatus());
 	}
 	 
 	@Test
 	public void testShipmentCancelled() {
-		pkg.setPackageStatus(Package.PACKAGE_STATUS.CANCELLED);
-		assertEquals(Package.PACKAGE_STATUS.CANCELLED, pkg.getPackageStatus());
+		parcel.setPackageStatus(Parcel.PACKAGE_STATUS.CANCELLED);
+		assertEquals(Parcel.PACKAGE_STATUS.CANCELLED, parcel.getPackageStatus());
 	}
 	
 	@Test
 	public void testShipmentShipped() {
-		pkg.setPackageStatus(Package.PACKAGE_STATUS.SHIPPED);
-		assertEquals(Package.PACKAGE_STATUS.SHIPPED, pkg.getPackageStatus());
+		parcel.setPackageStatus(Parcel.PACKAGE_STATUS.SHIPPED);
+		assertEquals(Parcel.PACKAGE_STATUS.SHIPPED, parcel.getPackageStatus());
 	}
 
 	@Test
 	public void testPackageIsNotNull() {
-		assertNotNull(pkg);
+		assertNotNull(parcel);
 	}
 
 	@Test
 	public void testPackageHasId() {
-		pkg.setId("valid id");
-		assertTrue(pkg.isValid());
-	
+		parcel.setId("valid id");
+		assertTrue(parcel.hasValidId());
 	}
 	
 	@Test
 	public void testPackageHasInvalidId() {
-		pkg.setId("");
-		assertFalse(pkg.isValid());
+		parcel.setId("");
+		assertFalse(parcel.hasValidId());
 		
-		pkg.setId(null);
-		assertFalse(pkg.isValid());
+		parcel.setId(null);
+		assertFalse(parcel.hasValidId());
 	}
 	
 	@Test
@@ -78,8 +77,8 @@ public class PackageTest {
 				"San Francisco",
 				"CA",
 				"94105");
-		pkg.setDestination(dest);
-		assertNotNull(pkg.getDestination());
+		parcel.setDestination(dest);
+		assertNotNull(parcel.getDestination());
 	}
 
 	@Test
@@ -90,20 +89,20 @@ public class PackageTest {
 				"San Francisco",
 				"CA",
 				"94105");
-		pkg.setOrigin(origin);
-		assertNotNull(pkg.getOrigin());
+		parcel.setOrigin(origin);
+		assertNotNull(parcel.getOrigin());
 	}
 
 	@Test
 	public void testPackageAirDelivery() {
-		pkg.setDeliveryType(Package.DELIVERY_TYPE.AIR);
-		assertEquals(Package.DELIVERY_TYPE.AIR, pkg.getDeliveryType());
+		parcel.setDeliveryType(Parcel.DELIVERY_TYPE.AIR);
+		assertEquals(Parcel.DELIVERY_TYPE.AIR, parcel.getDeliveryType());
 	}
 
 	@Test
 	public void testPackageGroundDelivery() {
-		pkg.setDeliveryType(Package.DELIVERY_TYPE.GROUND);
-		assertEquals(Package.DELIVERY_TYPE.GROUND, pkg.getDeliveryType());
+		parcel.setDeliveryType(Parcel.DELIVERY_TYPE.GROUND);
+		assertEquals(Parcel.DELIVERY_TYPE.GROUND, parcel.getDeliveryType());
 	}
 	
 }

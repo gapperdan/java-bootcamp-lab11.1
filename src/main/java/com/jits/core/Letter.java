@@ -1,6 +1,6 @@
 package com.jits.core;
 
-public class Letter extends Package {
+public class Letter extends Parcel {
 
 	public enum LETTER_TYPE {
 		FIREPROOF, WEATHERPROOF, PLAIN

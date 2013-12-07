@@ -13,7 +13,7 @@ public class BoxTest {
 	
 	@Before
 	public void setup() {
-		box = new Box();	
+		box = (Box) ParcelFactory.createParcel("box");
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class BoxTest {
 		box.setHeight(-1.0);
 		box.setWidth(0.0);
 		box.setDepth(0.0);
-		assertFalse(box.isValid());
+		assertFalse(box.isValidDimensions());
 	}
 	
 }

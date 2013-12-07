@@ -1,6 +1,6 @@
 package com.jits.core;
 
-public class Box extends Package {
+public class Box extends Parcel {
 	double width;
 	double depth;
 	double height;
@@ -25,7 +25,7 @@ public class Box extends Package {
 		this.height = height;
 	}
 
-	public boolean isValid() {
+	public boolean isValidDimensions() {
 		return (height > 0.0 && depth > 0.0 && width > 0.0);
 	}
 }

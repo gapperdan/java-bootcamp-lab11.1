@@ -15,7 +15,7 @@ public class LetterTest {
 	
 	@Before
 	public void setUp() {
-		letter = (Letter) PackageFactory.createPackage("letter");
+		letter = (Letter) ParcelFactory.createParcel("letter");
 	}
 	
 	@Test
