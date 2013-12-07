@@ -2,19 +2,19 @@ package com.jits.core;
 
 public abstract class Parcel {
 
-	public enum DELIVERY_TYPE {
+	public enum DeliveryMethod {
 		AIR, GROUND
 	}
 	
-	public enum PACKAGE_STATUS {
+	public enum PackageStatus {
 		APPROVED, CANCELLED, SHIPPED
 	}
 	
 	private String id;
 	private Address destination;
 	private Address origin;
-	private DELIVERY_TYPE deliveryType;
-	private PACKAGE_STATUS packageStatus; 
+	private DeliveryMethod deliveryMethod;
+	private PackageStatus packageStatus; 
 	
 	public String getId() {
 		return this.id;
@@ -40,12 +40,12 @@ public abstract class Parcel {
 		this.origin = origin;
 	}
 
-	public DELIVERY_TYPE getDeliveryType() {
-		return deliveryType;
+	public DeliveryMethod getDeliveryType() {
+		return deliveryMethod;
 	}
 
-	public void setDeliveryType(DELIVERY_TYPE deliveryType) {
-		this.deliveryType = deliveryType;
+	public void setDeliveryType(DeliveryMethod deliveryType) {
+		this.deliveryMethod = deliveryType;
 	}
 	
 	public boolean hasValidId() {
@@ -59,11 +59,11 @@ public abstract class Parcel {
 		return valid;
 	}
 
-	public PACKAGE_STATUS getPackageStatus() {
+	public PackageStatus getPackageStatus() {
 		return packageStatus;
 	}
 
-	public void setPackageStatus(PACKAGE_STATUS packageStatus) {
+	public void setPackageStatus(PackageStatus packageStatus) {
 		this.packageStatus = packageStatus;
 	}
 
@@ -76,8 +76,8 @@ public abstract class Parcel {
 		builder.append(destination);
 		builder.append(", origin=");
 		builder.append(origin);
-		builder.append(", deliveryType=");
-		builder.append(deliveryType);
+		builder.append(", deliveryMethod=");
+		builder.append(deliveryMethod);
 		builder.append(", packageStatus=");
 		builder.append(packageStatus);
 		builder.append("]");

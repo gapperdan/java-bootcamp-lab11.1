@@ -8,35 +8,33 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jits.core.DeliveryRequest.DELIVERY_TYPE;
+import com.jits.core.DeliveryRequest.DeliveryType;
 
 public class DeliveryRequestTest {
 	private DeliveryRequest req;
-	private HashMap m = new HashMap<String, String>();
+	private Map<String, String> dataMap = new HashMap<String, String>();
 	
-	@SuppressWarnings("unchecked")
 	@Before
 	public void setup() {
-		m.put("id", "id");
-		m.put("type", "LG");
-		m.put("toName", "bob");
-		m.put("toStreet", "terry st");
-		m.put("toCity", "sf");
-		m.put("toState", "ca");
-		m.put("toZip", "94105");
-		m.put("fromName", "joe");
-		m.put("fromStreet", "mission blvd");
-		m.put("fromCity", "sb");
-		m.put("fromState", "ca");
-		m.put("fromZip", "94066");
-		m.put("lType", "plain");
-		m.put("height", "1");
-		m.put("width", "2");
-		m.put("depth", "3");
+		dataMap.put("id", "id");
+		dataMap.put("type", "LG");
+		dataMap.put("toName", "bob");
+		dataMap.put("toStreet", "terry st");
+		dataMap.put("toCity", "sf");
+		dataMap.put("toState", "ca");
+		dataMap.put("toZip", "94105");
+		dataMap.put("fromName", "joe");
+		dataMap.put("fromStreet", "mission blvd");
+		dataMap.put("fromCity", "sb");
+		dataMap.put("fromState", "ca");
+		dataMap.put("fromZip", "94066");
+		dataMap.put("lType", "plain");
+		dataMap.put("height", "1");
+		dataMap.put("width", "2");
+		dataMap.put("depth", "3");
 		
-		req = new DeliveryRequest(m);
+		req = new DeliveryRequest(dataMap);
 	}
-	
 
 	@Test
 	public void testDeliveryIdNotNull() {
@@ -50,6 +48,7 @@ public class DeliveryRequestTest {
 	
 	@Test
 	public void testDeliveryTypeLG() {
-		assertEquals(DELIVERY_TYPE.LG, req.getType());
+		assertEquals(DeliveryType.LG, req.getType());
 	}
+
 }

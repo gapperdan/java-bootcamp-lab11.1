@@ -6,7 +6,7 @@ import com.jits.core.Address;
 import com.jits.core.Box;
 import com.jits.core.Parcel;
 import com.jits.core.Letter;
-import com.jits.core.Parcel.DELIVERY_TYPE;
+import com.jits.core.Parcel.DeliveryMethod;
 import com.jits.core.ParcelFactory;
 
 public class Jits {
@@ -56,9 +56,9 @@ public class Jits {
 				);
 		
 		if (approved == JOptionPane.YES_OPTION) {
-			parcel.setPackageStatus(Parcel.PACKAGE_STATUS.SHIPPED);
+			parcel.setPackageStatus(Parcel.PackageStatus.SHIPPED);
 		} else {
-			parcel.setPackageStatus(Parcel.PACKAGE_STATUS.CANCELLED);
+			parcel.setPackageStatus(Parcel.PackageStatus.CANCELLED);
 		}
 
 	}
@@ -67,16 +67,16 @@ public class Jits {
 
 		box = (Box) ParcelFactory.createParcel("box");
 		box.setId("Xmas Surprise!");
-		box.setDeliveryType(DELIVERY_TYPE.AIR);
-		box.setHeight(1.0);
-		box.setWidth(1.0);
-		box.setDepth(1.0);
+		box.setDeliveryType(DeliveryMethod.AIR);
+		box.setHeight(1);
+		box.setWidth(1);
+		box.setDepth(1);
 
-		origin = new Address("Francis Leung", "550 Terry Francois Blvd",
+		origin = new Address("Some Person", "555 Terry Francois Blvd",
 				"San Francisco", "CA", "94105");
 
-		destination = new Address("Danny Tizon", "550 Terry Francois Blvd",
-				"San Francisco", "CA", "94105");
+		destination = new Address("Another Person", "555 Anywhere St",
+				"San Francisco", "CA", "94101");
 
 		box.setOrigin(origin);
 		box.setDestination(destination);
@@ -85,13 +85,13 @@ public class Jits {
 
 		letter = (Letter) ParcelFactory.createParcel("letter");
 		letter.setId("Xmas Surprise!");
-		letter.setDeliveryType(DELIVERY_TYPE.GROUND);
+		letter.setDeliveryType(DeliveryMethod.GROUND);
 
-		destination = new Address("Francis Leung", "550 Terry Francois Blvd",
+		origin = new Address("Some Person", "555 Terry Francois Blvd",
 				"San Francisco", "CA", "94105");
 
-		origin = new Address("Danny Tizon", "550 Terry Francois Blvd",
-				"San Francisco", "CA", "94105");
+		destination = new Address("Another Person", "555 Anywhere St",
+				"San Francisco", "CA", "94101");
 
 		letter.setOrigin(origin);
 		letter.setDestination(destination);

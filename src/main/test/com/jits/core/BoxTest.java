@@ -23,17 +23,17 @@ public class BoxTest {
 
 	@Test
 	public void testBoxHasValidDimensions() {
-		box.setHeight(1.0);
-		box.setWidth(1.0);
-		box.setDepth(2.0);
-		assertNotEquals(0.0, (box.getHeight() * box.getWidth() * box.getDepth()), 0.0);
+		box.setHeight(1);
+		box.setWidth(1);
+		box.setDepth(2);
+		assertNotEquals(0, (box.getHeight() * box.getWidth() * box.getDepth()));
 	}
 	
 	@Test
 	public void testBoxforInvalidDimensions() {
-		box.setHeight(-1.0);
-		box.setWidth(0.0);
-		box.setDepth(0.0);
+		box.setHeight(-1);
+		box.setWidth(0);
+		box.setDepth(0);
 		assertFalse(box.isValidDimensions());
 	}
 	

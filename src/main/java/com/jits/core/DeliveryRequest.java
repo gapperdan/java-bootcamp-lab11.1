@@ -1,14 +1,14 @@
 package com.jits.core;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class DeliveryRequest {
 	
-	public enum DELIVERY_TYPE  {
-		LG,LA, BG, BA
+	public enum DeliveryType { 
+		LG, LA, BG, BA 
 	}
 
-	private DELIVERY_TYPE type;
+	private DeliveryType type;
 	private String id;
 	private String toName;
 	private String toStreet;
@@ -25,42 +25,43 @@ public class DeliveryRequest {
 	private String width;
 	private String depth;
 	
-	public DeliveryRequest(HashMap<String, String> m) {
-		String t = m.get("type");
-		if (t.equalsIgnoreCase("LG")) {
-			setType(DELIVERY_TYPE.LG);
-		} else if (t.equalsIgnoreCase("LA")) {
-			setType(DELIVERY_TYPE.LA);
-		} else if (t.equalsIgnoreCase("BG")) {
-			setType(DELIVERY_TYPE.BG);
-		} else if (t.equalsIgnoreCase("BA")) {
-			setType(DELIVERY_TYPE.BA);
-		}
+	public DeliveryRequest(Map<String, String> dataMap) {
+//		String t = m.get("type");
+//		if (t.equalsIgnoreCase("LG")) {
+//			setType(DELIVERY_TYPE.LG);
+//		} else if (t.equalsIgnoreCase("LA")) {
+//			setType(DELIVERY_TYPE.LA);
+//		} else if (t.equalsIgnoreCase("BG")) {
+//			setType(DELIVERY_TYPE.BG);
+//		} else if (t.equalsIgnoreCase("BA")) {
+//			setType(DELIVERY_TYPE.BA);
+//		}
 		
-		setId(m.get("id"));
-		setToName(m.get("toName"));
-		setToStreet(m.get("toStreet"));
-		setToCity(m.get("toCity"));
-		setToState(m.get("toState"));
-		setToZip(m.get("toZip"));
-		setFromName(m.get("fromName"));
-		setFromStreet(m.get("fromStreet"));
-		setFromCity(m.get("fromCity"));
-		setFromState(m.get("fromState"));
-		setFromZip(m.get("fromZip"));
-		setlType(m.get("lType"));
-		setHeight(m.get("height"));
-		setWidth(m.get("width"));
-		setDepth(m.get("depth"));
+		setType(DeliveryType.valueOf(dataMap.get("type")));
+		setId(dataMap.get("id"));
+		setToName(dataMap.get("toName"));
+		setToStreet(dataMap.get("toStreet"));
+		setToCity(dataMap.get("toCity"));
+		setToState(dataMap.get("toState"));
+		setToZip(dataMap.get("toZip"));
+		setFromName(dataMap.get("fromName"));
+		setFromStreet(dataMap.get("fromStreet"));
+		setFromCity(dataMap.get("fromCity"));
+		setFromState(dataMap.get("fromState"));
+		setFromZip(dataMap.get("fromZip"));
+		setlType(dataMap.get("lType"));
+		setHeight(dataMap.get("height"));
+		setWidth(dataMap.get("width"));
+		setDepth(dataMap.get("depth"));
 	}
 	
 	public Object getId() {
 		return this.id;
 	}
-	public DELIVERY_TYPE getType() {
+	public DeliveryType getType() {
 		return type;
 	}
-	public void setType(DELIVERY_TYPE type) {
+	public void setType(DeliveryType type) {
 		this.type = type;
 	}
 	public String getToName() {
@@ -150,7 +151,4 @@ public class DeliveryRequest {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
-
 }

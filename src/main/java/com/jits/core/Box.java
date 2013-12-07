@@ -1,31 +1,30 @@
 package com.jits.core;
 
 public class Box extends Parcel {
-	double width;
-	double depth;
-	double height;
+	int width;
+	int depth;
+	int height;
  
 	public double getWidth() {
 		return width;
 	}
-	public void setWidth(double width) {
+	public void setWidth(int width) {
 		this.width = width;
 	}
-	public double getDepth() {
+	public int getDepth() {
 		return depth;
 	}
-	public void setDepth(double depth) {
-		
+	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-	public double getHeight() {
+	public int getHeight() {
 		return height;
 	}
-	public void setHeight(double height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
 	public boolean isValidDimensions() {
-		return (height > 0.0 && depth > 0.0 && width > 0.0);
+		return (height > 0 && depth > 0 && width > 0);
 	}
 }

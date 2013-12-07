@@ -21,20 +21,20 @@ public class ParcelTest {
 	
 	@Test
 	public void testShipmentApproved() {
-		parcel.setPackageStatus(Parcel.PACKAGE_STATUS.APPROVED);
-		assertEquals(Parcel.PACKAGE_STATUS.APPROVED, parcel.getPackageStatus());
+		parcel.setPackageStatus(Parcel.PackageStatus.APPROVED);
+		assertEquals(Parcel.PackageStatus.APPROVED, parcel.getPackageStatus());
 	}
 	 
 	@Test
 	public void testShipmentCancelled() {
-		parcel.setPackageStatus(Parcel.PACKAGE_STATUS.CANCELLED);
-		assertEquals(Parcel.PACKAGE_STATUS.CANCELLED, parcel.getPackageStatus());
+		parcel.setPackageStatus(Parcel.PackageStatus.CANCELLED);
+		assertEquals(Parcel.PackageStatus.CANCELLED, parcel.getPackageStatus());
 	}
 	
 	@Test
 	public void testShipmentShipped() {
-		parcel.setPackageStatus(Parcel.PACKAGE_STATUS.SHIPPED);
-		assertEquals(Parcel.PACKAGE_STATUS.SHIPPED, parcel.getPackageStatus());
+		parcel.setPackageStatus(Parcel.PackageStatus.SHIPPED);
+		assertEquals(Parcel.PackageStatus.SHIPPED, parcel.getPackageStatus());
 	}
 
 	@Test
@@ -95,14 +95,14 @@ public class ParcelTest {
 
 	@Test
 	public void testPackageAirDelivery() {
-		parcel.setDeliveryType(Parcel.DELIVERY_TYPE.AIR);
-		assertEquals(Parcel.DELIVERY_TYPE.AIR, parcel.getDeliveryType());
+		parcel.setDeliveryType(Parcel.DeliveryMethod.AIR);
+		assertEquals(Parcel.DeliveryMethod.AIR, parcel.getDeliveryType());
 	}
 
 	@Test
 	public void testPackageGroundDelivery() {
-		parcel.setDeliveryType(Parcel.DELIVERY_TYPE.GROUND);
-		assertEquals(Parcel.DELIVERY_TYPE.GROUND, parcel.getDeliveryType());
+		parcel.setDeliveryType(Parcel.DeliveryMethod.GROUND);
+		assertEquals(Parcel.DeliveryMethod.GROUND, parcel.getDeliveryType());
 	}
 	
 }
