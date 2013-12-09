@@ -1,13 +1,10 @@
 package com.jits.core;
 
-import static org.junit.Assert.*;
-
-import com.jits.core.Letter.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.jits.core.Letter;
 
 public class LetterTest {
 
@@ -15,7 +12,7 @@ public class LetterTest {
 	
 	@Before
 	public void setUp() {
-		letter = (Letter) ParcelFactory.createParcel("letter");
+		letter = (Letter) ParcelFactory.createParcel(Letter.LETTER);
 	}
 	
 	@Test
@@ -25,20 +22,20 @@ public class LetterTest {
 	
 	@Test
 	public void testFireProofLetter() {
-		letter.setType(LETTER_TYPE.FIREPROOF);
-		assertEquals(LETTER_TYPE.FIREPROOF,  letter.getType()); 
+		letter.setType(LetterType.FIREPROOF);
+		assertEquals(LetterType.FIREPROOF,  letter.getType()); 
 	}
 
 	@Test
 	public void testPlainLetter() {
-		letter.setType(LETTER_TYPE.PLAIN);
-		assertEquals(LETTER_TYPE.PLAIN,  letter.getType()); 
+		letter.setType(LetterType.PLAIN);
+		assertEquals(LetterType.PLAIN,  letter.getType()); 
 	}
 
 	@Test
 	public void testWeatherProofLetter() {
-		letter.setType(LETTER_TYPE.WEATHERPROOF);
-		assertEquals(LETTER_TYPE.WEATHERPROOF,  letter.getType()); 
+		letter.setType(LetterType.WEATHERPROOF);
+		assertEquals(LetterType.WEATHERPROOF,  letter.getType()); 
 	}
 
 }

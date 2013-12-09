@@ -4,40 +4,31 @@ import java.util.Map;
 
 public class DeliveryRequest {
 	
-	public enum DeliveryType { 
-		LG, LA, BG, BA 
-	}
-
-	private DeliveryType type;
-	private String id;
-	private String toName;
-	private String toStreet;
-	private String toCity;
-	private String toState;
-	private String toZip;
-	private String fromName;
-	private String fromStreet;
-	private String fromCity;
-	private String fromState;
-	private String fromZip;
-	private String lType;
-	private String height;
-	private String width;
-	private String depth;
+	DeliveryType deliveryType;
+	String id;
+	String toName;
+	String toStreet;
+	String toCity;
+	String toState;
+	String toZip;
+	String fromName;
+	String fromStreet;
+	String fromCity;
+	String fromState;
+	String fromZip;
+	String lType;
+	String height;
+	String width;
+	String depth;
+	
+	Delivery delivery;
+	DeliveryMethod deliveryMethod;
+	Parcel parcel;
+	Address originAddress;
+	Address destinationAddress;
 	
 	public DeliveryRequest(Map<String, String> dataMap) {
-//		String t = m.get("type");
-//		if (t.equalsIgnoreCase("LG")) {
-//			setType(DELIVERY_TYPE.LG);
-//		} else if (t.equalsIgnoreCase("LA")) {
-//			setType(DELIVERY_TYPE.LA);
-//		} else if (t.equalsIgnoreCase("BG")) {
-//			setType(DELIVERY_TYPE.BG);
-//		} else if (t.equalsIgnoreCase("BA")) {
-//			setType(DELIVERY_TYPE.BA);
-//		}
-		
-		setType(DeliveryType.valueOf(dataMap.get("type")));
+		setDeliveryType(DeliveryType.valueOf(dataMap.get("type")));
 		setId(dataMap.get("id"));
 		setToName(dataMap.get("toName"));
 		setToStreet(dataMap.get("toStreet"));
@@ -53,16 +44,20 @@ public class DeliveryRequest {
 		setHeight(dataMap.get("height"));
 		setWidth(dataMap.get("width"));
 		setDepth(dataMap.get("depth"));
+		
+		setDeliveryMethod();
+		setParcel();
+		setDelivery();
 	}
 	
-	public Object getId() {
+	public String getId() {
 		return this.id;
 	}
-	public DeliveryType getType() {
-		return type;
+	public DeliveryType getDeliveryType() {
+		return deliveryType;
 	}
-	public void setType(DeliveryType type) {
-		this.type = type;
+	public void setDeliveryType(DeliveryType type) {
+		this.deliveryType = type;
 	}
 	public String getToName() {
 		return toName;
@@ -150,5 +145,66 @@ public class DeliveryRequest {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public DeliveryMethod getDeliveryMethod() {
+		return deliveryMethod;
+	}
+
+	public void setDeliveryMethod() {
+		
+		if (getDeliveryType().toString().endsWith("G")) {
+			this.deliveryMethod = DeliveryMethod.GROUND; 
+		} else if (getDeliveryType().toString().endsWith("A")) {
+			this.deliveryMethod = DeliveryMethod.AIR;
+		}
+		
+	}
+
+	public Parcel getParcel() {
+		return parcel;
+	}
+
+	public void setParcel() {
+		if (getDeliveryType().toString().startsWith("L")) {
+			this.parcel = ParcelFactory.createParcel(Letter.LETTER);
+			Letter letter = (Letter) parcel;
+			letter.setType(LetterType.valueOf(getlType()));
+		} else if (getDeliveryType().toString().startsWith("B")) {
+			this.parcel = ParcelFactory.createParcel(Box.BOX);
+			Box box = (Box) parcel;
+			box.setHeight(Integer.parseInt(getHeight()));
+			box.setWidth(Integer.parseInt(getWidth()));
+			box.setDepth(Integer.parseInt(getDepth()));
+		}
+		
+		Address address;
+		address = createAddress(getFromName(), getFromStreet(),
+				getFromCity(), getFromState(), getFromZip());
+
+		this.parcel.setOrigin(address);
+		
+		address = createAddress(getToName(), getToStreet(),
+				getToCity(), getToState(), getToZip());
+		
+		this.parcel.setDestination(address);
+		
+		this.parcel.setId(Long.parseLong(getId()));
+	}
+
+	public Delivery getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery() {
+		Delivery delivery = new Delivery();
+		delivery.setParcel(parcel);
+		delivery.setDeliveryMethod(deliveryMethod);
+		this.delivery = delivery;
+	}
+	
+	private Address createAddress(String name, String street, String city, String state, String zip) {
+		Address address = new Address(name, street, city, state, zip);
+		return address;
 	}
 }

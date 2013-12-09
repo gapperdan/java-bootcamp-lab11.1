@@ -1,6 +1,9 @@
 package com.jits.core;
 
 public class Box extends Parcel {
+	
+	final static String BOX = "box";
+	
 	int width;
 	int depth;
 	int height;

@@ -13,7 +13,7 @@ public class BoxTest {
 	
 	@Before
 	public void setup() {
-		box = (Box) ParcelFactory.createParcel("box");
+		box = (Box) ParcelFactory.createParcel(Box.BOX);
 	}
 
 	@Test

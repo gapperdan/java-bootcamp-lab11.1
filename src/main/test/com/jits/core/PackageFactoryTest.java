@@ -8,13 +8,13 @@ public class PackageFactoryTest {
 
 	@Test
 	public void testForInstanceOfBox() {
-		Parcel parcel = ParcelFactory.createParcel("box");
+		Parcel parcel = ParcelFactory.createParcel(Box.BOX);
 		assertTrue (parcel instanceof Box);
 	}
 	
 	@Test
 	public void testForInstanceOfLetter() {
-		Parcel parcel = ParcelFactory.createParcel("letter");
+		Parcel parcel = ParcelFactory.createParcel(Letter.LETTER);
 		assertTrue (parcel instanceof Letter);
 	}
 	

@@ -1,18 +1,16 @@
 package com.jits.core;
 
 public class Letter extends Parcel {
-
-	public enum LETTER_TYPE {
-		FIREPROOF, WEATHERPROOF, PLAIN
-	}
-
-	LETTER_TYPE type;
 	
-	public LETTER_TYPE getType() {
+	final static String LETTER = "letter";
+
+	LetterType type;
+	
+	public LetterType getType() {
 		return this.type;
 	}
 
-	public void setType(LETTER_TYPE type) {
+	public void setType(LetterType type) {
 		this.type = type;
 	}
 }

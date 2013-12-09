@@ -4,9 +4,8 @@ import javax.swing.JOptionPane;
 
 import com.jits.core.Address;
 import com.jits.core.Box;
-import com.jits.core.Parcel;
 import com.jits.core.Letter;
-import com.jits.core.Parcel.DeliveryMethod;
+import com.jits.core.Parcel;
 import com.jits.core.ParcelFactory;
 
 public class Jits {
@@ -29,7 +28,7 @@ public class Jits {
 				+ "id = "
 				+ box.getId()
 				+ " | Delivery Type = "
-				+ parcel.getDeliveryType()
+				//+ parcel.getDeliveryType()
 				+ "\n"
 				+ dimensionString
 				+ "----- Destination ----- \n"
@@ -56,9 +55,9 @@ public class Jits {
 				);
 		
 		if (approved == JOptionPane.YES_OPTION) {
-			parcel.setPackageStatus(Parcel.PackageStatus.SHIPPED);
+			//parcel.setPackageStatus(PackageStatus.SHIPPED);
 		} else {
-			parcel.setPackageStatus(Parcel.PackageStatus.CANCELLED);
+			//parcel.setPackageStatus(PackageStatus.CANCELLED);
 		}
 
 	}
@@ -66,8 +65,8 @@ public class Jits {
 	public static void main(String[] args) {
 
 		box = (Box) ParcelFactory.createParcel("box");
-		box.setId("Xmas Surprise!");
-		box.setDeliveryType(DeliveryMethod.AIR);
+		box.setId(1);
+		//box.setDeliveryType(DeliveryMethod.AIR);
 		box.setHeight(1);
 		box.setWidth(1);
 		box.setDepth(1);
@@ -84,8 +83,8 @@ public class Jits {
 		displayInfo(box);
 
 		letter = (Letter) ParcelFactory.createParcel("letter");
-		letter.setId("Xmas Surprise!");
-		letter.setDeliveryType(DeliveryMethod.GROUND);
+		letter.setId(2);
+		//letter.setDeliveryType(DeliveryMethod.GROUND);
 
 		origin = new Address("Some Person", "555 Terry Francois Blvd",
 				"San Francisco", "CA", "94105");
