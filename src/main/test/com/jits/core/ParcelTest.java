@@ -5,10 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jits.core.Address;
-import com.jits.core.Box;
-import com.jits.core.Letter;
-import com.jits.core.Parcel;
+import com.thirdParty.calibration.MailScale;
 
 public class ParcelTest {
 
@@ -70,6 +67,32 @@ public class ParcelTest {
 				"94105");
 		parcel.setOrigin(origin);
 		assertNotNull(parcel.getOrigin());
+	}
+	
+	@Test
+	public void testPackageHasWeight() {
+		
+		parcel.setWeight(0.0);
+		assertEquals(1.0, parcel.weighPackage(), 0);
+		
+		parcel.setWeight(0.9);
+		assertEquals(1.0, parcel.weighPackage(), 0);
+		
+		parcel.setWeight(1.1);
+		assertEquals(2.0, parcel.weighPackage(), 0);
+		
+		parcel.setWeight(1.5);
+		assertEquals(2.0, parcel.weighPackage(), 0);
+		
+		parcel.setWeight(2.0);
+		assertEquals(2.0, parcel.weighPackage(), 0);
+		
+	}
+	
+	@Test 
+	public void test3rdPartyScale() {
+		parcel.calculateWeight(parcel);
+		assertTrue(parcel.getWeight() > 0.0);
 	}
 
 }

@@ -1,10 +1,13 @@
 package com.jits.core;
 
+import com.thirdParty.calibration.MailScale;
+
 public abstract class Parcel {
 
-	private long id;
-	private Address destination;
-	private Address origin;
+	long id;
+	Address destination;
+	Address origin;
+	double weight;
 	
 	public long getId() {
 		return this.id;
@@ -55,5 +58,27 @@ public abstract class Parcel {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		if (weight == 0.0) {
+			this.weight = 1.0;
+		} else {
+			this.weight = Math.ceil(weight);
+		}
+	}
+	
+	public double weighPackage() {
+		return getWeight();
+	}
+	
+	public void calculateWeight(Object object) {
+		MailScale scale = new MailScale();
+		setWeight(scale.calculateWeight(object));
+	}
+	
 
 }
