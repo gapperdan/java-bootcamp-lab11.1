@@ -1,13 +1,20 @@
 package com.jits.util;
 
+import java.util.NavigableMap;
+import java.util.TreeMap;
+
 import com.jits.core.DeliveryMethod;
 
 public class ShippingUtil {
 	
-	final static int TIMEZONE_ET = 1;
-	final static int TIMEZONE_CT = 2;
-	final static int TIMEZONE_MT = 3;
-	final static int TIMEZONE_PT = 4;
+	static final NavigableMap<Integer, Integer> timeZoneMap = new TreeMap<Integer, Integer>();
+	static {
+		timeZoneMap.put(2, 1);
+		timeZoneMap.put(5, 2);
+		timeZoneMap.put(7, 3);
+		timeZoneMap.put(9, 4);
+	}
+	
 	final static double ZONE_FACTOR_AIR = 0.25;
 	final static double ZONE_FACTOR_GROUND = 2.0;
 
@@ -20,10 +27,33 @@ public class ShippingUtil {
 			zoneFactor = ZONE_FACTOR_AIR;
 		} else if (deliveryMethod.equals(DeliveryMethod.GROUND)) {
 			zoneFactor = ZONE_FACTOR_GROUND;
-	
 		}
  
 		return zoneFactor * zoneDiff;
+	}
+	
+	public static double calculateShippingCost(String fromZip, String toZip,
+			DeliveryMethod deliveryMethod, double weight, double volume) {
+		
+		double shippingCost = 0.0;
+		
+		if (weight < 1.0) {
+			weight = 1.0;
+		}
+		
+		if (volume < 1.0) {
+			volume = 1.0;
+		}
+		
+		int zoneDiff = calculateZoneDifference(fromZip, toZip, deliveryMethod);
+		
+		if (deliveryMethod.equals(DeliveryMethod.AIR)) {
+			shippingCost = zoneDiff * weight * volume;
+		} else if (deliveryMethod.equals(DeliveryMethod.GROUND)) {
+			shippingCost = zoneDiff * weight;
+		}
+		
+		return shippingCost;
 	}
 	
 	static int calculateZoneDifference(String fromZip, String toZip,
@@ -49,19 +79,15 @@ public class ShippingUtil {
 	static int getTimeZone(int firstDigit) {
 		int timeZone = 0;
 		
-		if (firstDigit <= 2) {
-			timeZone = TIMEZONE_ET;
-		} else if (firstDigit <= 5) {
-			timeZone = TIMEZONE_CT;
-		} else if (firstDigit <= 7) {
-			timeZone = TIMEZONE_MT;
-		} else if (firstDigit <= 9) {
-			timeZone = TIMEZONE_PT;
-		}
-		
+		timeZone = timeZoneMap.get(timeZoneMap.ceilingKey((firstDigit)));
 		return timeZone;
-		
 	}
 
-
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ShippingUtil []");
+		return builder.toString();
+	}
+	
 }

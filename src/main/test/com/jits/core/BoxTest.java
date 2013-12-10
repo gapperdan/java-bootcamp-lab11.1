@@ -26,7 +26,7 @@ public class BoxTest {
 		box.setHeight(1);
 		box.setWidth(1);
 		box.setDepth(2);
-		assertNotEquals(0, (box.getHeight() * box.getWidth() * box.getDepth()));
+		assertEquals(2.0, box.getVolume(), 0.0);
 	}
 	
 	@Test

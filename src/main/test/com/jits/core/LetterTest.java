@@ -38,4 +38,9 @@ public class LetterTest {
 		assertEquals(LetterType.WEATHERPROOF,  letter.getType()); 
 	}
 
+	@Test
+	public void testLetterHasVolume() {
+		assertEquals(1.0, letter.getVolume(), 0.0);
+	}
+
 }

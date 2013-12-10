@@ -1,6 +1,7 @@
 package com.jits.core;
 
 import static org.junit.Assert.*;
+import com.jits.util.ShippingUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -101,9 +102,9 @@ public class DeliveryRequestTest {
 	public void testShowConfirmationForLetterDeliveryByAir() {
 		dataMap.put("type", "LA");
 		request = new DeliveryRequest(dataMap);
-		request.getDelivery().setPackageStatus(DeliveryStatus.APPROVED);
+		request.getDelivery().setDeliveryStatus(DeliveryStatus.APPROVED);
 		delivery = request.getDelivery();
-		assertEquals(DeliveryStatus.APPROVED, delivery.getPackageStatus());
+		assertEquals(DeliveryStatus.APPROVED, delivery.getDeliveryStatus());
 	}
 
 	@Test
@@ -117,4 +118,44 @@ public class DeliveryRequestTest {
 		assertEquals(3, box.getDepth(), 0);
 	}
 
+	@Test
+	public void testDisplayDeliveryInfo() {
+		dataMap.put("type", "BG");
+		request = new DeliveryRequest(dataMap);
+		delivery = request.getDelivery();
+		System.out.println(delivery);		
+		assertEquals(DeliveryMethod.GROUND,delivery.getDeliveryMethod());
+	}
+	
+	@Test
+	public void testDeliveryCost() {
+		dataMap.put("type", "LA");
+		dataMap.put("fromZip", "94066");
+		dataMap.put("toZip", "84066");
+		
+		request = new DeliveryRequest(dataMap);
+		delivery = request.getDelivery();
+		delivery.getParcel().setWeight(2.0);
+		request.calculateShippingCostAndDeliveryTime();
+		System.out.println(delivery);
+		assertEquals(2.0, delivery.getShippingCost(), 0.0);
+	}
+	
+	@Test
+	public void testAcceptDelivery() {
+		dataMap.put("type", "LA");
+		dataMap.put("fromZip", "94066");
+		dataMap.put("toZip", "84066");
+		
+		request = new DeliveryRequest(dataMap);
+		delivery = request.getDelivery();
+		delivery.getParcel().setWeight(2.0);
+		request.calculateShippingCostAndDeliveryTime();
+		
+		delivery.approveDelivery();
+	
+		System.out.println("testAcceptDelivery: " + delivery);
+		assertEquals(DeliveryStatus.SHIPPED, delivery.getDeliveryStatus());
+	}
+	
 }

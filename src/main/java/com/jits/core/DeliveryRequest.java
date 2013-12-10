@@ -2,8 +2,10 @@ package com.jits.core;
 
 import java.util.Map;
 
+import com.jits.util.ShippingUtil;
+
 public class DeliveryRequest {
-	
+
 	DeliveryType deliveryType;
 	String id;
 	String toName;
@@ -20,13 +22,15 @@ public class DeliveryRequest {
 	String height;
 	String width;
 	String depth;
-	
+
 	Delivery delivery;
 	DeliveryMethod deliveryMethod;
 	Parcel parcel;
 	Address originAddress;
 	Address destinationAddress;
-	
+	double shippingCost;
+	double deliveryTime;
+
 	public DeliveryRequest(Map<String, String> dataMap) {
 		setDeliveryType(DeliveryType.valueOf(dataMap.get("type")));
 		setId(dataMap.get("id"));
@@ -44,105 +48,150 @@ public class DeliveryRequest {
 		setHeight(dataMap.get("height"));
 		setWidth(dataMap.get("width"));
 		setDepth(dataMap.get("depth"));
-		
+
 		setDeliveryMethod();
 		setParcel();
 		setDelivery();
+		calculateShippingCostAndDeliveryTime();
 	}
-	
+
+	public void calculateShippingCostAndDeliveryTime() {
+		double weight  = delivery.getParcel().getWeight();
+		String fromZip = delivery.getParcel().getOrigin().getZip();
+		String toZip = delivery.getParcel().getDestination().getZip();	
+		DeliveryMethod deliveryMethod = delivery.getDeliveryMethod();
+		Parcel parcel = delivery.getParcel();
+			
+		double volume = parcel.getVolume();
+		
+		delivery.setShippingCost(ShippingUtil.calculateShippingCost(fromZip, toZip, deliveryMethod, weight, volume));
+		delivery.setDeliveryTime(ShippingUtil.calculateDeliveryTime(fromZip, toZip, deliveryMethod));
+	}
+
 	public String getId() {
 		return this.id;
 	}
+
 	public DeliveryType getDeliveryType() {
 		return deliveryType;
 	}
+
 	public void setDeliveryType(DeliveryType type) {
 		this.deliveryType = type;
 	}
+
 	public String getToName() {
 		return toName;
 	}
+
 	public void setToName(String toName) {
 		this.toName = toName;
 	}
+
 	public String getToStreet() {
 		return toStreet;
 	}
+
 	public void setToStreet(String toStreet) {
 		this.toStreet = toStreet;
 	}
+
 	public String getToCity() {
 		return toCity;
 	}
+
 	public void setToCity(String toCity) {
 		this.toCity = toCity;
 	}
+
 	public String getToState() {
 		return toState;
 	}
+
 	public void setToState(String toState) {
 		this.toState = toState;
 	}
+
 	public String getToZip() {
 		return toZip;
 	}
+
 	public void setToZip(String toZip) {
 		this.toZip = toZip;
 	}
+
 	public String getFromName() {
 		return fromName;
 	}
+
 	public void setFromName(String fromName) {
 		this.fromName = fromName;
 	}
+
 	public String getFromStreet() {
 		return fromStreet;
 	}
+
 	public void setFromStreet(String fromStreet) {
 		this.fromStreet = fromStreet;
 	}
+
 	public String getFromCity() {
 		return fromCity;
 	}
+
 	public void setFromCity(String fromCity) {
 		this.fromCity = fromCity;
 	}
+
 	public String getFromState() {
 		return fromState;
 	}
+
 	public void setFromState(String fromState) {
 		this.fromState = fromState;
 	}
+
 	public String getFromZip() {
 		return fromZip;
 	}
+
 	public void setFromZip(String fromZip) {
 		this.fromZip = fromZip;
 	}
+
 	public String getlType() {
 		return lType;
 	}
+
 	public void setlType(String lType) {
 		this.lType = lType;
 	}
+
 	public String getHeight() {
 		return height;
 	}
+
 	public void setHeight(String height) {
 		this.height = height;
 	}
+
 	public String getWidth() {
 		return width;
 	}
+
 	public void setWidth(String width) {
 		this.width = width;
 	}
+
 	public String getDepth() {
 		return depth;
 	}
+
 	public void setDepth(String depth) {
 		this.depth = depth;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -152,13 +201,12 @@ public class DeliveryRequest {
 	}
 
 	public void setDeliveryMethod() {
-		
+
 		if (getDeliveryType().toString().endsWith("G")) {
-			this.deliveryMethod = DeliveryMethod.GROUND; 
+			this.deliveryMethod = DeliveryMethod.GROUND;
 		} else if (getDeliveryType().toString().endsWith("A")) {
 			this.deliveryMethod = DeliveryMethod.AIR;
 		}
-		
 	}
 
 	public Parcel getParcel() {
@@ -177,19 +225,21 @@ public class DeliveryRequest {
 			box.setWidth(Integer.parseInt(getWidth()));
 			box.setDepth(Integer.parseInt(getDepth()));
 		}
-		
+
 		Address address;
-		address = createAddress(getFromName(), getFromStreet(),
-				getFromCity(), getFromState(), getFromZip());
+		address = createAddress(getFromName(), getFromStreet(), getFromCity(),
+				getFromState(), getFromZip());
 
 		this.parcel.setOrigin(address);
-		
-		address = createAddress(getToName(), getToStreet(),
-				getToCity(), getToState(), getToZip());
-		
+
+		address = createAddress(getToName(), getToStreet(), getToCity(),
+				getToState(), getToZip());
+
 		this.parcel.setDestination(address);
-		
+
 		this.parcel.setId(Long.parseLong(getId()));
+		this.parcel.calculateWeight(this);
+		
 	}
 
 	public Delivery getDelivery() {
@@ -202,9 +252,26 @@ public class DeliveryRequest {
 		delivery.setDeliveryMethod(deliveryMethod);
 		this.delivery = delivery;
 	}
-	
-	private Address createAddress(String name, String street, String city, String state, String zip) {
+
+	private Address createAddress(String name, String street, String city,
+			String state, String zip) {
 		Address address = new Address(name, street, city, state, zip);
 		return address;
+	}
+
+	public double getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(double shippingCost) {
+		this.shippingCost = shippingCost;
+	}
+
+	public double getDeliveryTime() {
+		return deliveryTime;
+	}
+
+	public void setDeliveryTime(double deliveryTime) {
+		this.deliveryTime = deliveryTime;
 	}
 }

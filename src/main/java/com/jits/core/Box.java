@@ -30,4 +30,21 @@ public class Box extends Parcel {
 	public boolean isValidDimensions() {
 		return (height > 0 && depth > 0 && width > 0);
 	}
+	
+	public double getVolume() {
+		return height * width * depth;
+	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Box [width=");
+		builder.append(width);
+		builder.append(", depth=");
+		builder.append(depth);
+		builder.append(", height=");
+		builder.append(height);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

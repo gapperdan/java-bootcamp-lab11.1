@@ -1,6 +1,5 @@
 package com.jits.core;
 
-import com.thirdParty.calibration.MailScale;
 
 public abstract class Parcel {
 
@@ -44,20 +43,6 @@ public abstract class Parcel {
 		return valid;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Package [id=");
-		builder.append(id);
-		builder.append(", destination=");
-		builder.append(destination);
-		builder.append(", origin=");
-		builder.append(origin);
-		builder.append(", deliveryMethod=");
-		builder.append(", packageStatus=");
-		builder.append("]");
-		return builder.toString();
-	}
 
 	public double getWeight() {
 		return weight;
@@ -76,9 +61,11 @@ public abstract class Parcel {
 	}
 	
 	public void calculateWeight(Object object) {
-		MailScale scale = new MailScale();
-		setWeight(scale.calculateWeight(object));
+		MailScaleAdapter scale = new MailScaleAdapter();
+		double weight = scale.weighPackage(this);
+		setWeight(weight);
 	}
-	
+
+	public abstract double getVolume();
 
 }
