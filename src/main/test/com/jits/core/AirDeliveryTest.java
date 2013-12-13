@@ -5,26 +5,21 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DeliveryTest {
-	private Delivery delivery;
+public class AirDeliveryTest {
+
+	private AirDelivery delivery;
 	private Parcel parcel;
 
 	@Before
 	public void setup() {
-		delivery = new Delivery();
+		delivery = new AirDelivery();
 		parcel = (Box) ParcelFactory.createParcel("box");
-		
 	}
+	
 	@Test
 	public void testDeliveryHasAParcel() {
 		delivery.setParcel(parcel);
 		assertNotNull(delivery.getParcel());
-	}
-	
-	@Test
-	public void testDeliveryHasAGroundMethod() {
-		delivery.setDeliveryMethod(DeliveryMethod.GROUND);
-		assertEquals(DeliveryMethod.GROUND, delivery.getDeliveryMethod());
 	}
 
 }

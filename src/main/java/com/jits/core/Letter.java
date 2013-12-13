@@ -6,6 +6,10 @@ public class Letter extends Parcel {
 
 	LetterType type;
 	
+	public Letter() {
+		super.setInsurable(false);
+	}
+	
 	public LetterType getType() {
 		return this.type;
 	}

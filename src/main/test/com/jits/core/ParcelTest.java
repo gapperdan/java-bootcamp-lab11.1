@@ -3,7 +3,6 @@ package com.jits.core;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -92,9 +91,9 @@ public class ParcelTest {
 	
 	@Test 
 	public void test3rdPartyScale() {
-		parcel.calculateWeight(parcel);
-		assertTrue(parcel.getWeight() > 0.0);
+		double w = parcel.calculateWeight(parcel);
+		parcel.setWeight(w);
+		assertEquals(w, parcel.getWeight(), 1.0);
 	}
-
 	
 }

@@ -7,6 +7,10 @@ public class Address {
 	String state;
 	String zip;
 	
+	public Address() {
+		
+	}
+	
 	public Address(String name, String street, String city, String state, String zip) {
 		setName(name);
 		setStreet(street);

@@ -1,13 +1,18 @@
 package com.jits.core;
 
+import com.jits.util.ICalculator;
+import com.jits.util.ShippingCalculatorProxy;
 
-public class Delivery {
+public abstract class Delivery {
 	private Parcel parcel;
-	private DeliveryMethod deliveryMethod;
 	private DeliveryStatus deliveryStatus; 
 	private double deliveryTime;
 	private double shippingCost;
+	boolean isInsured;
 
+	abstract public void calculateDeliveryTime() ;
+	abstract public void calculateShippingCost();
+	
 	public Delivery() {
 		deliveryStatus = DeliveryStatus.INITIAL;
 	}
@@ -18,14 +23,6 @@ public class Delivery {
 
 	public void setParcel(Parcel parcel) {
 		this.parcel = parcel;
-	}
-	
-	public DeliveryMethod getDeliveryMethod() {
-		return deliveryMethod;
-	}
-
-	public void setDeliveryMethod(DeliveryMethod deliveryMethod) {
-		this.deliveryMethod = deliveryMethod;
 	}
 	
 	public DeliveryStatus getDeliveryStatus() {
@@ -56,13 +53,35 @@ public class Delivery {
 		this.deliveryStatus = DeliveryStatus.SHIPPED;
 	}
 	
+	public String getFromZip() {
+		return getParcel().getOrigin().getZip();
+		
+	}
+	public String getToZip() {
+		return getParcel().getDestination().getZip();
+	}
+	
+	public boolean isInsured() {
+		return isInsured;
+	}
+	
+	public void setInsured(boolean isInsured) {
+		this.isInsured = isInsured;
+	}
+	
+	public void applyInsurance(double insuranceRate) {
+		ICalculator calc = new ShippingCalculatorProxy();
+         		
+		double costWithInsurance = calc.applyInsurance(getShippingCost(), insuranceRate);
+		setShippingCost(costWithInsurance);
+	}
+
 	@Override
 	public String toString() {
+	
 		StringBuilder builder = new StringBuilder();
 		builder.append("Delivery [parcel=");
 		builder.append(parcel);
-		builder.append(", deliveryMethod=");
-		builder.append(deliveryMethod);
 		builder.append(", deliveryStatus=");
 		builder.append(deliveryStatus);
 		builder.append(", deliveryTime=");
@@ -72,5 +91,4 @@ public class Delivery {
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

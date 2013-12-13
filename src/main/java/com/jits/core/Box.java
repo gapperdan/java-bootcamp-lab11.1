@@ -7,7 +7,11 @@ public class Box extends Parcel {
 	int width;
 	int depth;
 	int height;
- 
+
+	public Box() {
+		super.setInsurable(true);
+	}
+	
 	public double getWidth() {
 		return width;
 	}

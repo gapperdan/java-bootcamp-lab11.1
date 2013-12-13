@@ -37,4 +37,9 @@ public class BoxTest {
 		assertFalse(box.isValidDimensions());
 	}
 	
+	@Test
+	public void testPackageTypeBoxIsInsurable() {
+		assertTrue(box.isInsurable());
+	}
+	
 }

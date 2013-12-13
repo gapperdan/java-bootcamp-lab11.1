@@ -1,6 +1,7 @@
 package com.jits.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -22,25 +23,30 @@ public class LetterTest {
 	
 	@Test
 	public void testFireProofLetter() {
-		letter.setType(LetterType.FIREPROOF);
-		assertEquals(LetterType.FIREPROOF,  letter.getType()); 
+		letter.setType(LetterType.fire);
+		assertEquals(LetterType.fire,  letter.getType()); 
 	}
 
 	@Test
 	public void testPlainLetter() {
-		letter.setType(LetterType.PLAIN);
-		assertEquals(LetterType.PLAIN,  letter.getType()); 
+		letter.setType(LetterType.plain);
+		assertEquals(LetterType.plain,  letter.getType()); 
 	}
 
 	@Test
 	public void testWeatherProofLetter() {
-		letter.setType(LetterType.WEATHERPROOF);
-		assertEquals(LetterType.WEATHERPROOF,  letter.getType()); 
+		letter.setType(LetterType.weather);
+		assertEquals(LetterType.weather,  letter.getType()); 
 	}
 
 	@Test
 	public void testLetterHasVolume() {
 		assertEquals(1.0, letter.getVolume(), 0.0);
+	}
+	
+	@Test
+	public void testLetterIsNotInsurable() {
+		assertFalse(letter.isInsurable());
 	}
 
 }

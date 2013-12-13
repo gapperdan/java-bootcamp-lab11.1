@@ -8,9 +8,9 @@
     <description></description>
     <display-name>JitsServlet</display-name>
     <servlet-name>JitsServlet</servlet-name>
-    <servlet-class>com.gap.jits.JitsServlet</servlet-class>
+    <servlet-class>com.jits.servlet.JitsServlet</servlet-class>
   </servlet>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>JitsServlet</servlet-name>
     <url-pattern>/JitsServlet</url-pattern>
   </servlet-mapping>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Hello</title>
+<title>JITS</title>
 </head>
 <body>
 <form action="/JitsServlet">

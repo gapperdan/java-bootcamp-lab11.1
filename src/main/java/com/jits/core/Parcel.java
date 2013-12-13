@@ -1,12 +1,16 @@
 package com.jits.core;
 
-
 public abstract class Parcel {
 
 	long id;
 	Address destination;
 	Address origin;
 	double weight;
+	boolean isInsurable;
+	
+	public Parcel() {
+		
+	}
 	
 	public long getId() {
 		return this.id;
@@ -60,12 +64,19 @@ public abstract class Parcel {
 		return getWeight();
 	}
 	
-	public void calculateWeight(Object object) {
+	public double calculateWeight(Object object) {
 		MailScaleAdapter scale = new MailScaleAdapter();
-		double weight = scale.weighPackage(this);
-		setWeight(weight);
+		return scale.weighPackage(this);
 	}
 
 	public abstract double getVolume();
+
+	public boolean isInsurable() {
+		return isInsurable;
+	}
+
+	public void setInsurable(boolean isInsurable) {
+		this.isInsurable = isInsurable;
+	}
 
 }
